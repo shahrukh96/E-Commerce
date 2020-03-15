@@ -24,9 +24,4 @@ public class Item {
 
     private Long sku;
 
-    @JsonIgnore
-    @ManyToOne
-    private Order order;
-
-
 }

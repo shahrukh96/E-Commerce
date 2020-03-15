@@ -41,11 +41,26 @@ public class OrderRestController {
         return ResponseEntity.ok(order);
     }
 
+    @GetMapping(ApiUrls.URL_ORDERS_ORDER_EMAIL)
+    public ResponseEntity<?> findOrderByEmail(@RequestParam("email") String email) {
+        Order order = orderService.findByEmail(email);
+        return ResponseEntity.ok(order);
+    }
+
     @PostMapping
     public ResponseEntity<?> save(@Valid @RequestBody Order order) {
         order = orderService.save(order);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(order.getId()).toUri();
         return ResponseEntity.created(location).body(order);
+    }
+
+    @DeleteMapping(ApiUrls.URL_ORDERS_ORDER)
+    public ResponseEntity<?> delete(@PathVariable("orderId") long id) {
+        if (!orderService.exists(id)){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        orderService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }
