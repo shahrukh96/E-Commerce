@@ -1,0 +1,23 @@
+server:
+  port: 8016
+
+spring:
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/ecommerce
+    username: shahrukhkarim
+    password: srk786
+
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    format-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL94Dialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
